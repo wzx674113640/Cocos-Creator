@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "5cf4f47c-25b3-47e2-9fdb-73d17860dd0f",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "排行榜-开始游戏@2x": {
+      "ver": "1.0.3",
+      "uuid": "6ea4e023-b678-497c-9e72-360261dfecdf",
+      "rawTextureUuid": "5cf4f47c-25b3-47e2-9fdb-73d17860dd0f",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 210,
+      "height": 106,
+      "rawWidth": 210,
+      "rawHeight": 106,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

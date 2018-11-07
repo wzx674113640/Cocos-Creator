@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "05597eb0-fd1c-4ddc-9809-754589e5f4c7",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "首页-客服@2x": {
+      "ver": "1.0.3",
+      "uuid": "a121c9c2-4cff-4552-b0c2-2902e600cad1",
+      "rawTextureUuid": "05597eb0-fd1c-4ddc-9809-754589e5f4c7",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 96,
+      "height": 116,
+      "rawWidth": 96,
+      "rawHeight": 116,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

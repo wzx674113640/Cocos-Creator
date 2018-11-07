@@ -1,0 +1,38 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "Arrow",
+  "_objFlags": 0,
+  "_rawFiles": null,
+  "_duration": 1,
+  "sample": 60,
+  "speed": 0.5,
+  "wrapMode": "2",
+  "curveData": {
+    "props": {
+      "position": [
+        {
+          "frame": 0,
+          "value": [
+            219.8,
+            37.8
+          ]
+        },
+        {
+          "frame": 0.5166666666666667,
+          "value": [
+            171.5,
+            65.7
+          ]
+        },
+        {
+          "frame": 1,
+          "value": [
+            219.8,
+            37.8
+          ]
+        }
+      ]
+    }
+  },
+  "events": []
+}

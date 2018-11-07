@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "3731386c-4c8b-40d0-8d14-987b6bce3827",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "游戏-红色方块@2x": {
+      "ver": "1.0.3",
+      "uuid": "32c6d951-dbd6-480b-8fe5-d39d5d21841b",
+      "rawTextureUuid": "3731386c-4c8b-40d0-8d14-987b6bce3827",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 173,
+      "height": 161,
+      "rawWidth": 173,
+      "rawHeight": 161,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}
