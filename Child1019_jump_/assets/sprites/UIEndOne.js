@@ -28,7 +28,6 @@ cc.Class({
     
     createImage(avatarUrl) {
         let image = window.wx.createImage();
-        console.log(image);
         var self = this;
         image.onload = function(){
             let texture = new cc.Texture2D();
@@ -36,7 +35,7 @@ cc.Class({
             texture.handleLoadedTexture();
             self.ImgHead.spriteFrame = new cc.SpriteFrame(texture);
         };
-        console.log(avatarUrl);
+        
         image.src = avatarUrl;
     } ,
 

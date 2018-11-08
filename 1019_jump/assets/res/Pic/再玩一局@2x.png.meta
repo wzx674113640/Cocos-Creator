@@ -1,14 +1,14 @@
 {
   "ver": "1.0.0",
-  "uuid": "5cf4f47c-25b3-47e2-9fdb-73d17860dd0f",
+  "uuid": "4f69ca23-5b48-4fe3-8b05-e8af2f046431",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
   "subMetas": {
-    "排行榜-开始游戏@2x": {
+    "再玩一局@2x": {
       "ver": "1.0.3",
-      "uuid": "6ea4e023-b678-497c-9e72-360261dfecdf",
-      "rawTextureUuid": "5cf4f47c-25b3-47e2-9fdb-73d17860dd0f",
+      "uuid": "16f20e58-7a5b-4808-98e9-469a4bfcb79e",
+      "rawTextureUuid": "4f69ca23-5b48-4fe3-8b05-e8af2f046431",
       "trimType": "auto",
       "trimThreshold": 1,
       "rotated": false,

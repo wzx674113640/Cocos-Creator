@@ -146,7 +146,9 @@ cc.Class({
             else
                 this.game_manager.move_Map(567-w_pos.x,-y_distance);
             */
-            this.game_manager.move_Map(380-w_pos.x,-y_distance);
+            //this.game_manager.move_Map(380-w_pos.x,-y_distance);
+
+            this.game_manager.move_Map(183-w_pos.x,-y_distance);
         }.bind(this));
 
         var seq =cc.sequence(j,end_func);

@@ -17,10 +17,10 @@ cc.Class({
     },
 
     start () {
-        console.log("开放域Start");
+       
         window.wx.onMessage(data => {
-            cc.log("接收主域发来消息：", data)
-            console.log("接收主域发来消息：", data)
+           
+           
             if (data.messageType == 0) {//移除排行榜
                 this.removeChild();
             } else if (data.messageType == 1) {//获取好友排行榜
@@ -66,8 +66,13 @@ cc.Class({
                                 }
                                 return b.KVDataList[0].value - a.KVDataList[0].value;
                             });
-                            var lastsocre = false
+                            var lastsocre = false;
+
+                            var smalldata = null;
+                           
+                            var isfirst = false;
                             for (let i = 0; i < data.length; i++) {
+                                /*
                                 if(data[i].KVDataList[0].value<score&&!lastsocre)
                                 { 
                                     lastsocre = true;
@@ -106,6 +111,34 @@ cc.Class({
                                 {
                                     this.UIEndOne.getComponent("UIEndOne").init(data[i-1]);
                                 }
+                                */
+                                 
+                                if(data[i].KVDataList[0].value<score&&lastsocre == false)
+                                {
+                                    if(i>0)
+                                    {   
+                                        smalldata = data[i-1];
+                                        if(smalldata.avatarUrl == userData.avatarUrl)
+                                        {
+                                            if(i>1)
+                                            {
+                                                smalldata = data[i-2];
+                                            }
+                                            else
+                                            {
+                                                isfirst = true;
+                                                //好友排名第一名  仅小于自己的最高排名(自己本来就是第一)
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        isfirst = true;
+                                        //好友排名第一名 分数比最高分要高(自己有可能是第一也有可能不为第一)；
+                                    }
+                                    lastsocre = true;
+                                }
+
                                 if (data[i].avatarUrl == userData.avatarUrl) {
                                   
                                     //第一名的情况
@@ -133,7 +166,7 @@ cc.Class({
                                     }
                                     else
                                     {
-                                        console.log("正常");
+                                        
                                          //EndOne 超越榜正常显示
                                          //this.UIEndOne.getComponent("UIEndOne").init(data[i-1]);
                                          //EndTwo 正常显示
@@ -144,9 +177,22 @@ cc.Class({
                                     }
                                 }
                             }
+                            if(data.length <= 1||isfirst == true)
+                            {
+                                this.UIEndOne.getComponent("UIEndOne").Win();
+                            }
+                            //空的 则此人为最后一名
+                            else 
+                            {
+                                if(smalldata== null)
+                                    this.UIEndOne.getComponent("UIEndOne").init(data[data.length-1]);
+                                else
+                                    this.UIEndOne.getComponent("UIEndOne").init(smalldata);
+                            }
+                           
                         },
                         fail: res => {
-                            console.log("wx.getFriendCloudStorage fail", res);
+                            console.log("wx.getFriendCloudStorage fail");
                             //this.loadingLabel.getComponent(cc.Label).string = "数据加载失败，请检测网络，谢谢。";
                         },
                     });
@@ -186,7 +232,7 @@ cc.Class({
                 window.wx.setUserCloudStorage({
                     KVDataList: [{key: MAIN_MENU_NUM, value: "" + score}],
                     success: function (res) {
-                        console.log('setUserCloudStorage', 'success', res)
+                        console.log('setUserCloudStorage', 'success')
                     },
                     fail: function (res) {
                         console.log('setUserCloudStorage', 'fail')
@@ -276,7 +322,7 @@ cc.Class({
                         }
                     },
                     fail: res => {
-                        console.log("wx.getFriendCloudStorage fail", res);
+                        console.log("wx.getFriendCloudStorage fail");
                         //this.loadingLabel.getComponent(cc.Label).string = "数据加载失败，请检测网络，谢谢。";
                     },
                 });

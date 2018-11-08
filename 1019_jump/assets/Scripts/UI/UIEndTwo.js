@@ -54,9 +54,14 @@ cc.Class({
         if(!Init.Instance.IsEnbaleFunction)
             return;
         this.UIgameing = Init.Instance.GetUINode("UIGameing");
+        this.UIgameing.getComponent("GameContorl").ScoreHideOrShow(false);
         this.CurScore.string = this.UIgameing.getComponent("GameContorl").curScore;
         this.node.parent.parent.Rank.ShowChild(false);
         this.BestScore.string = "历史最高"+  WXRequ.Instance.bestscore+ "分";
+        if(CC_WECHATGAME)
+        {
+            WXRequ.Instance.ShowOrHideAdervert(true);
+        }
         
     },
 
@@ -65,6 +70,10 @@ cc.Class({
         if(!Init.Instance.IsEnbaleFunction)
             return;
         this.node.parent.parent.Rank.HideChild();
+        if(CC_WECHATGAME)
+        {
+            WXRequ.Instance.ShowOrHideAdervert(false);
+        }
     },
     
     start () {

@@ -58,7 +58,6 @@ cc.Class({
 
     createImage(avatarUrl,ImgHead) {
         let image = window.wx.createImage();
-        console.log(image);
         image.onload = function(){
             let texture = new cc.Texture2D();
             texture.initWithElement(image);

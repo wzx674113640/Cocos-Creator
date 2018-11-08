@@ -7,6 +7,7 @@ cc.Class({
     properties: {
        Btn: cc.Node,
        MenuBtn:cc.Node,
+       _IsBtning: true,
     },
 
     onLoad()
@@ -47,12 +48,18 @@ cc.Class({
 
     ShowBtnsClick()
     {
-       
+       if(!this._IsBtning)
+            return;
+        this._IsBtning = false;
+        this.scheduleOnce(function() {
+            this._IsBtning = true;
+        }, 0.5);
         if(Init.Instance.IsGameStata)
         {
             
             this.PauseGame(true);
             this.Btn.active = true;
+            Init.Instance.SoundNode[0].play();
         }
             
         else
@@ -60,22 +67,23 @@ cc.Class({
             if(Init.Instance.IsGamingRank)
             {
                 Init.Instance.ShowUIEndTwo();
-                if(CC_WECHATGAME)
+                if(CC_WECHATGAME) 
                 {
                     window.wx.postMessage({
                         messageType: 4,
                         MAIN_MENU_NUM: "x1"
                     });
                 }
-                Init.Instance.IsGamingRank = false;
+                Init.Instance.SoundNode[0].play();
+                
             }
-            else
+            else 
             {
                 this.ReturnMianMenuClick();
                 return;
             }
         }
-        Init.Instance.SoundNode[0].play();
+        
     },
 
     //返回主页

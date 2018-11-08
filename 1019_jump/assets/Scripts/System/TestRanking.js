@@ -82,14 +82,18 @@ cc.Class({
         {
             this.friendButtonFunc();
         }
-        this.rankingScrollView.node.active = true;
         this.isShow = true;
+
+        this.scheduleOnce(function() {
+            this.rankingScrollView.node.active = true;
+        }, 0.01);
     },
 
     HideChild()
     {
-        this.rankingScrollView.node.active = false;
         this.isShow = false;
+        this.rankingScrollView.node.active = false;
+        
     },
 
     // 刷新子域的纹理

@@ -79,6 +79,7 @@ cc.Class({
         _Skilling: false,
 //小于-1是随机生成盒子
         //_radomIndex = -1,
+        
     },
 
     HideTeachUI()
@@ -165,6 +166,8 @@ cc.Class({
 
     Init()
     {
+        //难度递增 
+        this.mindex = 1;
         this._Skilling = false;
         this.index = 0;
         Init.Instance.IsGameStata = true;
@@ -184,7 +187,9 @@ cc.Class({
        
         for (var i=0;i<5;i++)
         {
-            this.add_Box();
+            //** 方块左右生成
+            //this.add_Box();
+            this.add_block();
         }
         
     },
@@ -199,21 +204,33 @@ cc.Class({
     },
     
     start () {
+        this.mindex = 1;
         this.randomColor();
         this.BestScore.string = "历史最高"+  WXRequ.Instance.bestscore + "分";
     },
 
     add_block(IsNeedChangedir = false){
-        if(IsNeedChangedir)
-            this.direction = -1;
-        else
-            this.direction = 1;
+        
+        this.direction = IsNeedChangedir? -1:1;
         this.cur_box = this.next_block;
-        //var myindex = this._radomIndex == -1? Math.floor(Math.random()*5):this._radomIndex;
-        this.next_block = cc.instantiate(this.box_prefab[Math.floor(Math.random()*6)]);
+        this.next_block = cc.instantiate(this.box_prefab[Math.floor(Math.random()*this.box_prefab.length)]);
         this.box_root.addChild(this.next_block);
-        this.next_block.getComponent("Box").Direction = this.direction ;
-
+        var sbox = this.next_block.getComponent("Box");
+        sbox.Direction = this.direction ;
+        if(this.curScore >= (20 * this.mindex)-5)
+        {
+            if(this.curScore >=55)
+            {
+                this.mindex = 1;
+                sbox.DestoryTime = 0.1;
+            }
+            else
+            {
+                this.mindex++;
+                sbox.DestoryTime -= 0.3 * this.mindex;
+            }
+            
+        }
         var x_distance = this.x_dis;
         var y_distance = x_distance*this.y_radio;
 
@@ -221,6 +238,8 @@ cc.Class({
         next_pos.x += x_distance * this.direction;
         next_pos.y += y_distance;
         this.next_block.setPosition(next_pos);
+
+
         this.AllBoxs.push(this.next_block);
        
     },
@@ -230,8 +249,9 @@ cc.Class({
         var result = this.ColorIsSame();
         var m1 = cc.moveBy(0.1,offer_x,offer_y);
         var end_func = cc.callFunc(function(){
-        //var isdir = (Math.random()<0.5)? true : false;
-        this.add_Box();
+        //**方块左右生成
+        //this.add_Box();
+        this.add_block();
         var indexs = this.player.instance.AllBoxIndex-1;
         if(indexs>=0)
         {
@@ -292,7 +312,7 @@ cc.Class({
         this.player.instance.IsCanJump = false;
         Init.Instance.SoundNode[1].play();
         this.player.instance.GameingState = "GameOver";
-        if(this.player.instance.ResurtCount>=2)
+        if(this.player.instance.ResurtCount>=3)
         {
             Init.Instance.ShowUIEndTwo();
             this.node.parent.parent.Rank.submitScoreButtonFunc(this.curScore);

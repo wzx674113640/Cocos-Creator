@@ -1,5 +1,6 @@
 
 var WXRequ = require("WXRequ");
+ 
 
 var Init =  cc.Class({
     extends: cc.Component,
@@ -44,11 +45,23 @@ var Init =  cc.Class({
 
          NodeUIPop: cc.Node,
 
-         SJumpPrefabs:cc.Prefab,
-         
-        
+         PanelMask: cc.Node,
     },
-    
+    ShowPanelMask()
+    {
+        this.PanelMask.active = true;
+        wx.showLoading({
+            title: "",
+          })
+    },
+
+    HidePanelMask(time)
+    {
+        this.scheduleOnce(function() {
+            this.PanelMask.active = false;
+            wx.hideLoading();
+        }, time);
+    },
 
     start () {
         this. IsSoundPlay = true;
@@ -111,6 +124,7 @@ var Init =  cc.Class({
         }
         this.TopMask.active = false;
         this.MaskRank.active = false;
+        this.node.Rank.HideChild();
     },
 
 

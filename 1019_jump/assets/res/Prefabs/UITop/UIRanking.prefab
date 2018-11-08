@@ -1649,7 +1649,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "New Label",
+    "_name": "TxtTol1",
     "_objFlags": 0,
     "_parent": {
       "__id__": 44
@@ -1682,7 +1682,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 200,
+      "width": 160,
       "height": 40
     },
     "_rotationX": 0,
@@ -1717,7 +1717,7 @@
     "_N$file": null,
     "_isSystemFontUsed": true,
     "_spacingX": 0,
-    "_N$string": "好友排行榜",
+    "_N$string": "好友排行",
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
@@ -2064,7 +2064,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "New Label",
+    "_name": "TxtTol2",
     "_objFlags": 0,
     "_parent": {
       "__id__": 57
@@ -2097,7 +2097,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 200,
+      "width": 160,
       "height": 40
     },
     "_rotationX": 0,
@@ -2132,7 +2132,7 @@
     "_N$file": null,
     "_isSystemFontUsed": true,
     "_spacingX": 0,
-    "_N$string": "世界排行榜",
+    "_N$string": "世界排行",
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
@@ -2489,7 +2489,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "6ea4e023-b678-497c-9e72-360261dfecdf"
+      "__uuid__": "16f20e58-7a5b-4808-98e9-469a4bfcb79e"
     },
     "_type": 1,
     "_sizeMode": 1,
@@ -2552,9 +2552,7 @@
       "b": 255,
       "a": 255
     },
-    "_N$normalSprite": {
-      "__uuid__": "6ea4e023-b678-497c-9e72-360261dfecdf"
-    },
+    "_N$normalSprite": null,
     "_N$pressedSprite": {
       "__uuid__": "e9ec654c-97a2-4787-9325-e6a10375219a"
     },
@@ -2622,6 +2620,12 @@
     },
     "LayoutNode": {
       "__id__": 8
+    },
+    "TxtTol1": {
+      "__id__": 51
+    },
+    "TxtTol2": {
+      "__id__": 64
     }
   },
   {

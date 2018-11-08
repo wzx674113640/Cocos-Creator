@@ -17,13 +17,15 @@ var WXRequ = cc.Class({
 
     properties: {
         IsGetUserInfo: false,
+
+        is_open: 0
     },
 
     onLoad()
     { 
         this.C2G_GetUserInfo();
     },
-
+    
     
 //获取后台信息
     C2G_GetUserInfo()
@@ -64,6 +66,7 @@ var WXRequ = cc.Class({
                         self.bestscore = severuserinfo.score;
                         playInfo.total_amount = severuserinfo.total_amount;
                         self.IsGetUserInfo = true;
+                        self.is_open = severuserinfo.is_open;
                         }
                     })
                     } else {
@@ -121,6 +124,7 @@ var WXRequ = cc.Class({
                             self.bestscore = severuserinfo.score;
                             playInfo.total_amount = severuserinfo.total_amount;
                             self.IsGetUserInfo = true;
+                            self.is_open = severuserinfo.is_open;
                             button.hide();
                             }
                         })
@@ -181,34 +185,43 @@ var WXRequ = cc.Class({
           })
     },
 
-    ShowAdervert()
+    ShowOrHideAdervert(Active)
     {
-        try {
+        if(Active)
+        {
             var screenHeight = wx.getSystemInfoSync().screenHeight
             var screenWidth = wx.getSystemInfoSync().screenWidth
-            console.log("广告显示");
             let bannerAd = wx.createBannerAd({
-                adUnitId: '3ee87ccb18c5ac95',
+                adUnitId: 'adunit-e8e30be4a0b05273',
                 style: {
-                  left: 0,
-                  top: screenHeight-200,
-                  width: screenWidth,
-                  height:200,
+                    left: 0,
+                    top: screenHeight-130,
+                    width: screenWidth,
+                    height:200,
                 }
-              });
-              
+                });
+                
             bannerAd.onLoad(() => {
+                bannerAd.style.top = screenHeight-bannerAd.style.realHeight;
                 bannerAd.show();
-                console.log('banner 广告加载成功');
-              });
-              
-            bannerAd.show()
-              .then(() => console.log('banner 广告显示'));
-        } 
-        catch (error) {
-            cc.log("需要微信开发者环境:"+error);
-            console.log("需要微信开发者环境:"+error);
+                });
+                
+            //bannerAd.show().then(() => console.log('banner 广告显示'));
+            
+            bannerAd.onError(err => {
+                console.log(err)
+            })
+
+            this.bannerAd = bannerAd;
         }
+        else
+        {
+            if(this.bannerAd!=null&&this.bannerAd!=undefined)
+            {
+                this.bannerAd.destroy();
+            }
+        }
+        
        
     },
 
@@ -225,6 +238,7 @@ var WXRequ = cc.Class({
                 common.diamond += 20;
             },
             fail(res){
+                action();
                 //console.log("转发失败!!!")
             } 
         })

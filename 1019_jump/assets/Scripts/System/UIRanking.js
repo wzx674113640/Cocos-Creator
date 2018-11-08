@@ -62,6 +62,12 @@ cc.Class({
             default:null,
         },
 
+        TxtTol1: cc.Node,
+       
+
+        TxtTol2: cc.Node,
+        
+      
     },
 
     onEnable()
@@ -79,6 +85,9 @@ cc.Class({
         this.WTol.ischecked = false;
         this.Wcheck.active = false;
         */
+
+        this.TxtTol1.opacity = 255;
+        this.TxtTol2.opacity = 150;
         this.IsLoadJosn = true;
         this.node.self = this;
         this.WRanking.active = false;
@@ -102,6 +111,7 @@ cc.Class({
             return;
         this.node.parent.parent.Rank.HideChild();
         this.ShowHideOneUI(true);
+        Init.Instance.IsGamingRank = false;
     },
     
     LoadItem(RankingNode)
@@ -113,6 +123,8 @@ cc.Class({
 
     ShowFrienRank()
     {
+        this.TxtTol1.opacity = 255;
+        this.TxtTol2.opacity = 150;
         Init.Instance.SoundNode[0].play();
         this.WRanking.active = false;
         this.myselfItem.active = false;
@@ -121,6 +133,9 @@ cc.Class({
 
     ShowWorldRank()
     {
+        Init.Instance.ShowPanelMask();
+        this.TxtTol2.opacity = 255;
+        this.TxtTol1.opacity = 150;
         Init.Instance.SoundNode[0].play();
         this.node.parent.parent.Rank.HideChild();
         this.WRanking.active = true;
@@ -128,6 +143,7 @@ cc.Class({
         var self = this;
         if(this.IsLoadJosn)
         {
+            Init.Instance.ShowPanelMask();
             this.WNode.removeAllChildren();
             wx.request({
                 url: 'https://tfk.qkxz.com/?act=paihang&openid={$openid}',
@@ -156,11 +172,11 @@ cc.Class({
                     self.myselfItem.getComponent("ItemRanking").setInfo(view.num, view.avatar_url,view.nick_name,view.score);
                     self.myselfItem.active = true;
                     self.IsLoadJosn = false;
+                    Init.Instance.HidePanelMask();
                 }
               })
-          
         }
-        
+        Init.Instance.HidePanelMask();
     },
   
     StartGameClick()
@@ -177,5 +193,5 @@ cc.Class({
         //Init.Instance.SoundNode[0].play();
         //群排行分享
         WXRequ.Instance.onShareBtn();
-    }
+    },
 });
