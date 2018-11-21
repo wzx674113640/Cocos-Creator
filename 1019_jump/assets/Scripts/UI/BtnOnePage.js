@@ -7,9 +7,41 @@ cc.Class({
     properties: {
        Btn: cc.Node,
        MenuBtn:cc.Node,
+       ResultPanel: cc.Node,
        _IsBtning: true,
+       
+       SoundSprite: {
+           type:cc.SpriteFrame,
+           default:[]
+       },
+
+       SoundBtnSprite:cc.Sprite,
+       _isfirst: true
     },
 
+    onEnable()
+    {
+        var sound = cc.sys.localStorage.getItem("Sound");
+        if(sound === ""|| sound == "1"|| sound == null)
+        {
+            this.SoundBtnSprite.spriteFrame = this.SoundSprite[0];
+            if(this._isfirst)
+            {
+                Init.Instance.SoundControl(true);
+                this._isfirst =false;
+            }
+        }
+        else if(sound == "0")
+        {
+            this.SoundBtnSprite.spriteFrame = this.SoundSprite[1];
+            if(this._isfirst)
+            {
+                Init.Instance.SoundControl(false);
+                this._isfirst =false;
+            }
+        }
+    },
+    
     onLoad()
     {
         if(!CC_WECHATGAME)
@@ -121,6 +153,36 @@ cc.Class({
             cc.log("好玩游戏的场景为空！");
         }
         this.Btn.active = false;
-    }
+    },
 
+    SoundClick()
+    {
+        Init.Instance.SoundNode[0].play();
+        var sound = cc.sys.localStorage.getItem("Sound");
+       
+        if(sound === ""|| sound == "1"|| sound == null)
+        {
+            Init.Instance.SoundControl(false);
+            cc.sys.localStorage.setItem("Sound",0); 
+            this.SoundBtnSprite.spriteFrame = this.SoundSprite[1];
+        }
+        else if(sound == "0")
+        {
+            Init.Instance.SoundControl(true);
+            cc.sys.localStorage.setItem("Sound",1); 
+            this.SoundBtnSprite.spriteFrame = this.SoundSprite[0];
+        }
+    },
+
+    ResultClick()
+    {
+        Init.Instance.SoundNode[0].play();
+        this.ResultPanel.active = true;
+    },
+
+    closeResult()
+    {
+        Init.Instance.SoundNode[0].play();
+        this.ResultPanel.active = false;
+    }
 });

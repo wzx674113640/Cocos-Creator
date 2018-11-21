@@ -47,13 +47,24 @@ cc.Class({
 
         //跳完后0.8秒之内必须跳
         coolTime:0.8,
-        
+
+        //****数据模型
         curScore:0,
+
+        curCoin:0,
+        //****数据模型
+
 
         UIScore:
         {
             type:cc.Node,
             default:null,
+        },
+
+        UICoin:
+        {
+            type:cc.Node,
+            default: null,
         },
 
         IsPause: false,
@@ -122,12 +133,15 @@ cc.Class({
         this.IsPause = false;
         this.cur_mybox = null;
         this.curScore = 0;
+        this.curCoin = 0;
         this.UIScore.getComponent(cc.Label).string = 0;
+        this.UICoin.getComponent(cc.Label).string = 0;
         this.box_root.removeAllChildren();
        
         this.AllBoxs.length = 0;
         this.player.instance.Clear();
-        
+        if(CC_WECHATGAME)
+            wx.triggerGC();
     },
 
     onDisable()
@@ -160,12 +174,15 @@ cc.Class({
 
     ScoreHideOrShow(IsShow)
     {
-        this.UIScore.active = IsShow;
+        //this.UIScore.active = IsShow;
+        //this.UICoin.active = IsShow;
         this.BestScore.node.active = IsShow;
     },
 
     Init()
     {
+       
+        WXRequ.Instance.ShowOrHideAdervert(false);
         //难度递增 
         this.mindex = 1;
         this._Skilling = false;
@@ -229,7 +246,6 @@ cc.Class({
                 this.mindex++;
                 sbox.DestoryTime -= 0.3 * this.mindex;
             }
-            
         }
         var x_distance = this.x_dis;
         var y_distance = x_distance*this.y_radio;
@@ -238,21 +254,24 @@ cc.Class({
         next_pos.x += x_distance * this.direction;
         next_pos.y += y_distance;
         this.next_block.setPosition(next_pos);
-
-
+        this.next_block.getComponent("Box").creatCoin();
         this.AllBoxs.push(this.next_block);
        
     },
 
     move_Map(offer_x,offer_y)
     {
-        var result = this.ColorIsSame();
-        var m1 = cc.moveBy(0.1,offer_x,offer_y);
+        this.player.instance.AllBoxIndex += 1;
+        var m1 = cc.moveBy(0.2,offer_x,offer_y);
         var end_func = cc.callFunc(function(){
-        //**方块左右生成
+        //**方块左右生成s
         //this.add_Box();
+        if(Init.Instance.IsSoundPlay)
+            this.AllBoxs[this.player.instance.AllBoxIndex].getComponent(cc.AudioSource).play();
         this.add_block();
         var indexs = this.player.instance.AllBoxIndex-1;
+        this.AllBoxs[indexs+1].getComponent("Box").Boxblink();
+        this.player.instance.Ani();
         if(indexs>=0)
         {
             this.AllBoxs[indexs].getComponent("Box").DestoyBox();
@@ -261,9 +280,10 @@ cc.Class({
         {
             //todo 消除第一个
         }
-        
+        var result = this.ColorIsSame();
         if(result ==false)
         {
+            
             this.game_over();
         }
         else
@@ -286,19 +306,27 @@ cc.Class({
 
         this.map_root.runAction(seq);
         
-       
     },
 
     ColorIsSame()
     {
-        this.player.instance.AllBoxIndex += 1;
-       
-        this.player.instance.CurBox = this.AllBoxs[this.player.instance.AllBoxIndex];
-        var Boxcolor = this.AllBoxs[this.player.instance.AllBoxIndex].getComponent("Box").My_Color;
+        var _box = this.AllBoxs[this.player.instance.AllBoxIndex]
+        this.player.instance.CurBox = _box;
+        var Boxcolor = _box.getComponent("Box").My_Color;
         if(Boxcolor == this.player.instance.InputColor)
         {
             this.curScore+=1;
+            if(_box.getComponent("Box")._IsCoinBox)
+            {
+                this.curCoin += 1;
+                cc.log("金币"+this.curCoin);
+                _box.getComponent("Box")._IsCoinBox = false;
+                _box.getComponent("Box").CoinNode.active = false;
+                //播放音效
+            }
+            
             this.UIScore.getComponent(cc.Label).string = this.curScore;
+            this.UICoin.getComponent(cc.Label).string = this.curCoin;
             return true;
         }
         return false;
@@ -322,6 +350,7 @@ cc.Class({
                     messageType: 4,
                     MAIN_MENU_NUM: "x1"
                 });
+                WXRequ.Instance.ShowOrHideAdervert(false);
             }
         }
         else
@@ -330,19 +359,21 @@ cc.Class({
             this.node.parent.parent.Rank.submitScoreButtonFunc(this.curScore);
         }
         
-        if(CC_WECHATGAME)
-        {
-            WXRequ.Instance.C2G_GameOver(this.curScore);
-        }
+        //if(CC_WECHATGAME)
+        //{
+            //WXRequ.Instance.C2G_GameOver(this.curScore);
+        //}
     },
 
     game_Next()
     {
         this.clearAndGameStart();
+        this.player.instance.startGame();
     },
 
     game_Resur()
     {
+        WXRequ.Instance.ShowOrHideAdervert(false);
         this.player.instance.ResurtCount++;
         this.player.instance.GameingState = "Gameing";
         this.player.instance.IsCanJump = true;

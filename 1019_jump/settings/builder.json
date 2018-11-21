@@ -27,11 +27,11 @@
   },
   "renderMode": "0",
   "startScene": "b302e7a3-ee77-4560-92aa-209b5a8d3d08",
-  "title": "1022_jump12345",
+  "title": "1022_jump1109",
   "webOrientation": "auto",
   "wechatgame": {
-    "REMOTE_SERVER_ROOT": "",
-    "appid": "",
+    "REMOTE_SERVER_ROOT": "https://tfk.qkxz.com/",
+    "appid": "wxe0672d2593b64b2c",
     "isSubdomain": false,
     "orientation": "portrait",
     "subContext": "Sub"

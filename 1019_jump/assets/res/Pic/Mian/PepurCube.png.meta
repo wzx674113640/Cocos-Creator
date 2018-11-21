@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "1c2b2110-458f-4647-b865-ce58cb5a2dbc",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "PepurCube": {
+      "ver": "1.0.3",
+      "uuid": "119d4bbd-8124-4366-82a2-3bb0223ef9dc",
+      "rawTextureUuid": "1c2b2110-458f-4647-b865-ce58cb5a2dbc",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 173,
+      "height": 160,
+      "rawWidth": 173,
+      "rawHeight": 160,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

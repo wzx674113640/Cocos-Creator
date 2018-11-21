@@ -1,0 +1,115 @@
+[
+  {
+    "__type__": "cc.Prefab",
+    "_name": "",
+    "_objFlags": 0,
+    "_rawFiles": null,
+    "data": {
+      "__id__": 1
+    }
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "SkinPrefab",
+    "_objFlags": 0,
+    "_parent": null,
+    "_children": [],
+    "_tag": -1,
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 2
+      }
+    ],
+    "_prefab": {
+      "__id__": 3
+    },
+    "_id": "",
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_cascadeOpacityEnabled": true,
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 0,
+      "height": 0
+    },
+    "_rotationX": 0,
+    "_rotationY": 0,
+    "_scaleX": 1,
+    "_scaleY": 1,
+    "_position": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_localZOrder": 0,
+    "_globalZOrder": 0,
+    "_opacityModifyRGB": false,
+    "groupIndex": 0
+  },
+  {
+    "__type__": "a131eFfPjRHA5je3KrsRjgS",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "SkinPicList": [
+      {
+        "__uuid__": "d02a2a43-dfc7-4247-8e7b-102ef97ee5d7"
+      },
+      {
+        "__uuid__": "e2a561b7-1137-4496-9fad-f14fe37176a9"
+      },
+      {
+        "__uuid__": "f5468576-92ee-4920-8c4f-8c8c63d8c27d"
+      },
+      {
+        "__uuid__": "89026e69-9684-41e5-a527-a5911359554c"
+      },
+      {
+        "__uuid__": "47cae4f5-a456-4fe2-a984-aaf4392513f7"
+      },
+      {
+        "__uuid__": "34e445a8-e824-483f-8fe4-7d6424509ee6"
+      },
+      {
+        "__uuid__": "fb37034d-c413-48df-ab99-b4691bc1c087"
+      }
+    ],
+    "SkinStringList": [
+      "皮卡丘",
+      "蝙蝠侠",
+      "僵小鱼",
+      "佩奇",
+      "小丑",
+      "小丑2",
+      "小菇凉"
+    ]
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__uuid__": "684b5012-8c9a-44eb-bc4c-96d8b200239a"
+    },
+    "fileId": "40XoIUmRJGU4xfqoT68EhF",
+    "sync": false
+  }
+]

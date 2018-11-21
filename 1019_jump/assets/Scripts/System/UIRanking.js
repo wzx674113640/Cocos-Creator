@@ -37,19 +37,7 @@ cc.Class({
             default:null,
         },
 
-        /*
-        WTol:
-        {
-            type:cc.Toggle,
-            default:null,
-        },
-
        
-
-        FCheck: cc.Node,
-
-        Wcheck:cc.Node,
-        */
         Content:
         {
             type:cc.Node,
@@ -79,13 +67,7 @@ cc.Class({
             this.FTol.check();
         }
         
-        /*
-        this.FTol.ischecked = true;
-        this.FCheck.active =true; 
-        this.WTol.ischecked = false;
-        this.Wcheck.active = false;
-        */
-
+       
         this.TxtTol1.opacity = 255;
         this.TxtTol2.opacity = 150;
         this.IsLoadJosn = true;
@@ -182,10 +164,17 @@ cc.Class({
     StartGameClick()
     {
         Init.Instance.SoundNode[0].play();
+        if(Init.Instance.GetUINode("UIGameing")._activeInHierarchy == true)
+        {
+           // console.log(this.node);
+            console.log("游戏中排行榜的游戏开始");
+            Init.Instance.GetUINode("UIGameing").getComponent("GameContorl").player.instance.startGame();
+        }
         this.ShowHideOneUI(true);
         Init.Instance.ShowUIGaming();
         Init.Instance.GetUINode("UIGameing").getComponent("GameContorl").clearAndGameStart();
         Init.Instance.closeAllTop();
+        
     },
     
     FlockRank()

@@ -84,9 +84,8 @@ cc.Class({
         }
         this.isShow = true;
 
-        this.scheduleOnce(function() {
-            this.rankingScrollView.node.active = true;
-        }, 0.01);
+        this.rankingScrollView.node.active = true;
+      
     },
 
     HideChild()

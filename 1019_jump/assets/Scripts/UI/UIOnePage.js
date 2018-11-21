@@ -19,10 +19,20 @@ cc.Class({
 
         MyUI: cc.Node,
         SoundBtnNode: cc.Node,
+
+        ChatBtnNode: cc.Node,
+        
+        MoreCoinNode: cc.Node,
+
+        UIAwardBtn:cc.Node,
+
+        _time:0,
+        _isfirst: true
     },
 
     onLoad()
     {
+        this.UIrotation();
         if(!CC_WECHATGAME)
             return;
         this.AdpativeUI();
@@ -37,9 +47,9 @@ cc.Class({
             let height = sysInfo.screenHeight;
             if(height/width>2)
             {
-                console.log("适配..");
                 //需要适配
-                this.SoundBtnNode.setPosition(-322,695);
+                this.SoundBtnNode.setPosition(-306,695);
+                this.ChatBtnNode.setPosition(-222.2,688.3)
             }
             this.IsAdpative = true;
         }
@@ -58,28 +68,8 @@ cc.Class({
     },
 
     start () {
-        /*
-        if(this.LoadPic == undefined||this.LoadPic == null)
-        {
-            cc.log("音乐！");
-            console.log("音乐！");
-            //this.PicSoundClose = cc.url.raw('resources/Pic/SoundClose.png');
-            //this.PicSoundOn = cc.url.raw('resources/Pic/SoundOn.png');
-            this.LoadPic = true;
-            var sound = cc.sys.localStorage.getItem("Sound");s
-            console.log(sound);
-            if(sound == ""|| sound == 1|| sound == null)
-            {
-                Init.Instance.SoundControl(true);
-                this.SoundBtnSprite.spriteFrame = this.SpriteList[0];
-            }
-            else if(sound == 0)
-            {
-                Init.Instance.SoundControl(false);
-                this.SoundBtnSprite.spriteFrame = this.SpriteList[1];
-            }
-        }
-        */
+       
+     
     },
 
     BtnsStartClick()
@@ -141,12 +131,34 @@ cc.Class({
     
     onEnable()
     {
+        var sound = cc.sys.localStorage.getItem("Sound");
+        if(sound === ""|| sound == "1"|| sound == null)
+        {
+            this.SoundBtnSprite.spriteFrame = this.SpriteList[0];
+            if(this._isfirst)
+            {
+                Init.Instance.SoundControl(true);
+                this._isfirst =false;
+            }
+                
+        }
+        else if(sound == "0")
+        {
+            this.SoundBtnSprite.spriteFrame = this.SpriteList[1];
+            if(this._isfirst)
+            {
+                Init.Instance.SoundControl(false);
+                this._isfirst =false;
+            }
+        }
         if(!Init.Instance.IsEnbaleFunction)
             return;
         Init.Instance.BtnOne.active = false;
+        
     },
 
     onDisable()
+
     {
         if(!Init.Instance.IsEnbaleFunction)
             return;
@@ -156,11 +168,19 @@ cc.Class({
     OnWorking()
     {
         Init.Instance.SoundNode[0].play();
-        wx.showToast({
-            title: '开发中...',
-            icon: 'success',
-            duration: 2000
-          })
+        this.WXTopUI("开发中...");
+    },
+
+    WXTopUI(TXT)
+    {
+        if(cc.CC_WECHATGAME)
+        {
+            wx.showToast({
+                title: TXT,
+                icon: 'success',
+                duration: 800
+              })
+        }
     },
 
     //清理缓存
@@ -172,4 +192,49 @@ cc.Class({
         cc.sys.localStorage.removeItem("gender")
     },
 
+    ShowCoinPanel()
+    {
+        Init.Instance.SoundNode[0].play();
+        Init.Instance.ShowUIMoreCoin();
+    },
+
+    ShowUISkin()
+    {
+        Init.Instance.SoundNode[0].play();
+        Init.Instance.ShowUISkin();
+    },
+
+    ShowUIAward()
+    {
+        Init.Instance.SoundNode[0].play();
+        Init.Instance.ShowUIAward();
+    },
+
+    ShowUISgin()
+    {
+        Init.Instance.SoundNode[0].play();
+        Init.Instance.ShowUISgin();
+    },
+    
+    ShowUIResur()
+    {
+        Init.Instance.SoundNode[0].play();
+        Init.Instance.ShowUIResurt();
+    },
+    
+    UIrotation()
+    {
+        var left = cc.rotateTo(0.5,-15);
+        var right = cc.rotateTo(0.5,15);
+        var seq = cc.sequence(left,right);
+        var rep = cc.repeatForever(seq);
+        this.UIAwardBtn.runAction(rep);
+    },
+
+    update(dt)
+    { 
+        //this._time += 0.1*dt;
+        //this.UIAwardBtn.rotation += Math.sin(this._time);
+        //cc.log(this.UIAwardBtn.rotation);
+    }
 });

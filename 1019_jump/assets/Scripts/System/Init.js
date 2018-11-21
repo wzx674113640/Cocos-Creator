@@ -46,12 +46,17 @@ var Init =  cc.Class({
          NodeUIPop: cc.Node,
 
          PanelMask: cc.Node,
+         
+         SkinPicPrefab:cc.Prefab,
+
+         _SkinPics:null,
+         _SkinStrings:null
     },
     ShowPanelMask()
     {
         this.PanelMask.active = true;
         wx.showLoading({
-            title: "",
+            //title: "",
           })
     },
 
@@ -64,6 +69,10 @@ var Init =  cc.Class({
     },
 
     start () {
+        //加载皮肤
+        var SkinSprite = cc.instantiate(this.SkinPicPrefab).getComponent("SkinPrefab");
+        this._SkinPics = SkinSprite.SkinPicList;
+        this._SkinStrings = SkinSprite.SkinStringList; 
         this. IsSoundPlay = true;
         this.IsGamingRank = false;
 
@@ -75,7 +84,8 @@ var Init =  cc.Class({
             if(i>0)
             {
                 this.UIDic[this.UIMain[i].name].active = false;
-            } 
+            }
+          
         }
 
         for(var i = 0;i<this.UITop.length;i++)
@@ -83,6 +93,7 @@ var Init =  cc.Class({
             this.LoadGame(this.UITop[i],this.node.getChildByName("UITop"));
            
             this.UIDic[this.UITop[i].name].active = false;
+            
         }
 
         for(var i = 0;i<this.UIPop.length;i++)
@@ -133,10 +144,7 @@ var Init =  cc.Class({
     {
         this.ShowUI(this.UIMain[1]);
         this.IsGameStata = true;
-        if(CC_WECHATGAME)
-        {
-            WXRequ.Instance.C2G_GameStart();
-        }
+        
     },
 
     //显示排行榜
@@ -164,6 +172,42 @@ var Init =  cc.Class({
     {
         this.IsGameStata = false;
         this.ShowUI(this.UITop[2]);
+    },
+
+    //皮肤页面
+    ShowUISkin()
+    {
+        this.ShowUI(this.UIMain[2]);
+    },
+    //分享奖励页面
+    ShowUIAward()
+    {
+        this.ShowUI(this.UITop[3]);
+        //this.BtnOne.active = true;
+    },
+    //显示签到页面
+    ShowUISgin()
+    {   
+        this.ShowUI(this.UITop[4]);
+        //this.BtnOne.active = true;
+    },
+
+    //显示复活页面
+    ShowUIResurt()
+    {   
+        this.ShowUI(this.UITop[5]);
+        //this.BtnOne.active = true;
+    },
+
+    //更多金币页面
+    ShowUIMoreCoin()
+    {
+        this.ShowUI(this.UITop[6]);
+    },
+
+    ShowUIGetSkin()
+    {
+        this.ShowUI(this.UITop[7]);
     },
 
     OnSharaBtn()
@@ -195,7 +239,12 @@ var Init =  cc.Class({
                 if( UIPrefabs == this.UITop[i])
                 {
                     var top =  this.UIDic[this.UITop[i].name];
-                    if(i!=0)
+                    if(top.getComponent("BaseUIPop"))
+                    {
+                        //播放动画
+                        top.getComponent("BaseUIPop").playAni();
+                    }
+                    if(i==1||i==2)
                         this.TopMask.active = true;
                     else
                         this.MaskRank.active = true;
@@ -232,7 +281,6 @@ var Init =  cc.Class({
    
     PlayVoice()
     {
-        console.log("声音"+this.SoundNode[1].isPlaying);
         if(!this.SoundNode[1].isPlaying)
             this.SoundNode[1].play();
         else

@@ -12,13 +12,16 @@ cc.Class({
         TimeLable:cc.Label,
 
         BtnShara:cc.Node,
-        _IsBtnSee : true
+        _IsBtnSee : true,
+
+        ResurPanel: cc.Node,
+        
+        MianUI:cc.Node,
     },
-   
+    
 
     Res_Game()
     {
-        console.log("复活了！！");
         this.UIgameing.getComponent("GameContorl").game_Resur();
         Init.Instance.closeAllTop();
         this.UIgameing.getComponent("GameContorl").ScoreHideOrShow(true);
@@ -26,8 +29,12 @@ cc.Class({
 
     AskFriendClick()
     {
-       
-        //Init.Instance.SoundNode[0].play();
+        this.MianUI.active = false;
+        this.ResurPanel.active = true;
+        this.isStop = true;
+        this.node.parent.parent.Rank.HideChild();
+        Init.Instance.SoundNode[0].play();
+        /*
         WXRequ.Instance.onShareBtn(
             ()=>{
                 wx.showToast({
@@ -38,7 +45,7 @@ cc.Class({
                   this.Res_Game();
             }
         );
-    
+        */
     },
 
     SeeVedioClick()
@@ -124,7 +131,7 @@ cc.Class({
     {
         if(!Init.Instance.IsEnbaleFunction)
             return;
-        console.log("是否开启" + WXRequ.Instance.is_open);
+        this.node.Instance = this;
         var active  = WXRequ.Instance.is_open == 0? false:true;
         this.BtnShara.active = active;
         
@@ -158,8 +165,6 @@ cc.Class({
             return;
         Init.Instance.GetUINode("BtnOnePage").active = true;
         this.node.parent.parent.Rank.HideChild();
-        if(CC_WECHATGAME)
-            WXRequ.Instance.ShowOrHideAdervert(false);
     },
 
 
