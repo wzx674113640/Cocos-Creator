@@ -773,7 +773,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 499,
+      "width": 548,
       "height": 100
     },
     "_rotationX": 0,
@@ -808,7 +808,7 @@
     "_N$file": null,
     "_isSystemFontUsed": true,
     "_spacingX": 0,
-    "_N$string": "说明： 邀请群友点击你的链接可获得1张\n        每次游戏中复活卡只可使用3次",
+    "_N$string": "说明：好友点击你的链接可以获得1张复活卡\n每次游戏中复活卡只可使用3次",
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
@@ -956,7 +956,7 @@
     "_N$file": null,
     "_isSystemFontUsed": true,
     "_spacingX": 0,
-    "_N$string": "分享到群",
+    "_N$string": "去求助",
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
@@ -1515,6 +1515,9 @@
     },
     "TxtCount": {
       "__id__": 17
+    },
+    "BtnNode": {
+      "__id__": 25
     }
   },
   {

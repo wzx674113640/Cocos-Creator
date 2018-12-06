@@ -35,15 +35,20 @@ cc.Class({
                 this.rankLabel.node.color = new cc.Color(77, 191, 71, 255);
                 break;
         }
-
+        
         this.createImage(avatarUrl,this.avatarImgSprite);
         if(IsBg)
         {
             var bg = this.MySprite.getComponent(cc.Sprite);
             this.createImage("src/bg.png",bg);
+            
             if(txtRanking%2==0)
             {
                 this.MySprite.active = false;
+            }
+            else
+            {
+                this.MySprite.active = true;
             }
         }
         //this.loadImg(this.avatarImgSprite,avatarUrl);
@@ -51,7 +56,14 @@ cc.Class({
         this.topScoreLabel.string = grade.toString();
     },
 
-   
+    clear()
+    {
+        this.rankLabel.string = "";
+        this.avatarImgSprite.node.active = false;
+        this.nickLabel.string = "";
+        this.topScoreLabel.string = "";
+        this.MySprite.active = false;
+    },
 
 
     createImage(avatarUrl,avatarImgSprite) {
@@ -62,6 +74,8 @@ cc.Class({
             texture.initWithElement(image);
             texture.handleLoadedTexture();
             avatarImgSprite.spriteFrame = new cc.SpriteFrame(texture);
+            if(avatarImgSprite == self.avatarImgSprite)
+                avatarImgSprite.node.active = true;
         };
         image.src = avatarUrl;
     } 

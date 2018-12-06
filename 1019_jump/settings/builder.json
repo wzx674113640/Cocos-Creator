@@ -30,7 +30,7 @@
   "title": "1022_jump1109",
   "webOrientation": "auto",
   "wechatgame": {
-    "REMOTE_SERVER_ROOT": "https://tfk.qkxz.com/",
+    "REMOTE_SERVER_ROOT": "",
     "appid": "wxe0672d2593b64b2c",
     "isSubdomain": false,
     "orientation": "portrait",

@@ -1780,8 +1780,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -312.0000000000001,
-      "y": 576
+      "x": -325,
+      "y": 617
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -2701,7 +2701,8 @@
     ],
     "SoundBtnSprite": {
       "__id__": 39
-    }
+    },
+    "_isfirst": true
   },
   {
     "__type__": "cc.PrefabInfo",

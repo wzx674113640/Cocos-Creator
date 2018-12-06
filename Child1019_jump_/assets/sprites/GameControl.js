@@ -14,6 +14,8 @@ cc.Class({
         
         Content: cc.Node,
         LayoutNode: cc.Node,
+        
+        RankingScrollView:cc.ScrollView
     },
 
     start () {
@@ -26,12 +28,20 @@ cc.Class({
             } else if (data.messageType == 1) {//获取好友排行榜
                 this.fetchFriendData(data.MAIN_MENU_NUM);
             } else if (data.messageType == 3) {//提交得分
-                this.saveUserInfo(data.MAIN_MENU_NUM, data.score);
+                this.f(data.MAIN_MENU_NUM, data.score);
                 this.gameOverRank(data.MAIN_MENU_NUM,data.score);
             } else if (data.messageType == 4) {//获取好友排行榜横向排列展示模式
                 this.ShowUITwo();
             } else if (data.messageType == 5) {//获取群排行榜
                 this.fetchGroupFriendData(data.MAIN_MENU_NUM, data.shareTicket);
+            }
+            else if(data.messageType == 6)//好友排行置顶
+            {
+                this.ShowRankingTop();
+            }
+            else if(data.messageType == 7)//清理排行榜
+            {
+                this.clearRanking();
             }
         });
        
@@ -72,47 +82,6 @@ cc.Class({
                            
                             var isfirst = false;
                             for (let i = 0; i < data.length; i++) {
-                                /*
-                                if(data[i].KVDataList[0].value<score&&!lastsocre)
-                                { 
-                                    lastsocre = true;
-                                    if(i==0)
-                                    {
-                                        this.UIEndOne.getComponent("UIEndOne").Win();
-                                    }
-                                    else
-                                    {
-                                        let mdata = data[i-1];
-                                        if(mdata.avatarUrl == userData.avatarUrl)
-                                        {
-                                            if(i-2>=0)
-                                            {
-                                                this.UIEndOne.getComponent("UIEndOne").init(data[i-2]);
-                                            }
-                                            else
-                                            {
-                                                this.UIEndOne.getComponent("UIEndOne").Win();
-                                            }
-                                        }
-                                        else
-                                        {
-                                            this.UIEndOne.getComponent("UIEndOne").init(data[i-1]);
-                                        }
-                                        
-                                    }
-                                }
-                                // 第一名
-                                else if(i==0&&data[i].KVDataList[0].value>score && data[i].avatarUrl == userData.avatarUrl)
-                                {
-                                    this.UIEndOne.getComponent("UIEndOne").Win();
-                                }
-                                // 最后一名
-                                else if(data.length-1>0&&i==data.length-1&&lastsocre == false)
-                                {
-                                    this.UIEndOne.getComponent("UIEndOne").init(data[i-1]);
-                                }
-                                */
-                                 
                                 if(data[i].KVDataList[0].value<score&&lastsocre == false)
                                 {
                                     if(i>0)
@@ -218,7 +187,7 @@ cc.Class({
 
     //保存用户信息
     saveUserInfo(MAIN_MENU_NUM,score)
-    {
+    { 
         window.wx.getUserCloudStorage({
             // 以key/value形式存储
             keyList: [MAIN_MENU_NUM],
@@ -259,8 +228,22 @@ cc.Class({
         this.scrollViewContent.removeAllChildren();
     },
 
+    ShowRankingTop()
+    {
+        this.RankingScrollView.scrollToTop(0);
+    },
+
+    clearRanking()
+    {
+        var chidrens =this.scrollViewContent.children;
+        for(var i = 0;i< chidrens.length;i++)
+        {
+            chidrens[i].getComponent('RankItem').clear();
+        }
+    },
+    
     fetchFriendData(MAIN_MENU_NUM) {
-        this.removeFriendChild();
+        //this.removeFriendChild();
         this.UIEndOne.active = false;
         this.UIEndTwo.active = false;
         this.FriendRank.active = true;
@@ -287,11 +270,21 @@ cc.Class({
                             return b.KVDataList[0].value - a.KVDataList[0].value;
                         });
                         var IsSetMySelf = false;
+                        var chidrens =this.scrollViewContent.children;
                         for (let i = 0; i < data.length; i++) {
                             var playerInfo = data[i];
-                            var item = cc.instantiate(this.prefabRankItem);
+                            
+                            if(chidrens.length>i)
+                            {
+                                var item = chidrens[i];
+                            }
+                            else
+                            {
+                                var item = cc.instantiate(this.prefabRankItem);
+                                this.scrollViewContent.addChild(item);
+                            }
+
                             item.getComponent('RankItem').init(i, playerInfo);
-                            this.scrollViewContent.addChild(item);
                             if(playerInfo.avatarUrl == userData.avatarUrl)
                             {
                                 this.myRankingItem.getComponent('RankItem').init(i, playerInfo,false);

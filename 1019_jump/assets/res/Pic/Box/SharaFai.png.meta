@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "2dc21feb-ef4d-4c6f-b0aa-7a4c21d59301",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "SharaFai": {
+      "ver": "1.0.3",
+      "uuid": "cda0f552-1a40-4152-be59-688903afd44f",
+      "rawTextureUuid": "2dc21feb-ef4d-4c6f-b0aa-7a4c21d59301",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 440,
+      "height": 80,
+      "rawWidth": 440,
+      "rawHeight": 80,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

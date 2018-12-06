@@ -699,7 +699,7 @@
     "_actualFontSize": 40,
     "_fontSize": 40,
     "_lineHeight": 40,
-    "_enableWrapText": false,
+    "_enableWrapText": true,
     "_N$file": null,
     "_isSystemFontUsed": true,
     "_spacingX": 0,
@@ -754,7 +754,7 @@
       "__id__": 16
     },
     "_enabled": true,
-    "transition": 3,
+    "transition": 0,
     "pressedColor": {
       "__type__": "cc.Color",
       "r": 255,
